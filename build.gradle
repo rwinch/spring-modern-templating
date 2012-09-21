@@ -1,0 +1,153 @@
+ext.junitVersion ='4.8.2'
+ext.seleniumVersion = '2.25.0'
+ext.springVersion = '3.2.0.M2'
+ext.scalateVersion = '1.5.3-scala_2.8.2'
+
+configure(allprojects) {
+  apply plugin: 'java'
+  apply plugin: 'eclipse-wtp'
+  apply plugin: 'idea'
+
+  group = 'org.springframework'
+
+  sourceCompatibility=1.6
+  targetCompatibility=1.6
+
+  [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:none']
+
+  test.systemProperty("java.awt.headless", "true")
+
+  repositories {
+    mavenCentral()
+    maven { url "http://repo.springsource.org/libs-milestone" }
+    maven { url "http://repo.springsource.org/libs-snapshot" }
+  }
+
+  configurations.all {
+    resolutionStrategy {
+      ['asm','aop','beans','core','web','context','webmvc','context-support'].each {
+        force  "org.springframework:spring-$it:$springVersion"
+      }
+      force "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final"
+    }
+  }
+
+  tasks.withType(org.gradle.api.plugins.jetty.AbstractJettyRunTask) { jetty ->
+      jetty.contextPath = 'messages'
+  }
+  tasks.withType(org.gradle.plugins.ide.eclipse.GenerateEclipseWtpComponent) {
+      project.eclipse.classpath.file.whenMerged { classpath->
+          project.eclipse.wtp.component.file.whenMerged { wtpComponent ->
+              wtpComponent.contextPath = project.tasks.findByName('jettyRun')?.contextPath?.replaceFirst('/','')
+          }
+      }
+  }
+}
+
+project('messages') {
+    description = 'Message Controllers and Service Tier'
+
+    dependencies {
+        compile "org.springframework:spring-context:$springVersion",
+            "org.springframework:spring-webmvc:$springVersion",
+            "org.springframework.data:spring-data-jpa:1.1.1.RELEASE",
+            "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final",
+            "org.hibernate:hibernate-entitymanager:4.1.4.Final",
+            "org.hibernate:hibernate-validator:4.1.0.Final",
+            "org.aspectj:aspectjrt:1.6.10",
+            "javax.validation:validation-api:1.0.0.GA",
+            "org.slf4j:slf4j-log4j12:1.6.1",
+            "org.hsqldb:hsqldb:2.2.8"
+    }
+}
+project('mustache') {
+    apply plugin: 'war'
+    apply plugin: 'jetty'
+
+    description = 'Mustache Sample'
+
+    dependencies {
+      compile project(':messages')
+      // https://github.com/ericdwhite/mustache.java-spring-webmvc/blob/master/pom.xml
+      compile("com.samskivert:jmustache:1.5")
+    }
+}
+
+project('scalate-scaml') {
+    apply plugin: 'war'
+    apply plugin: 'jetty'
+
+    description = 'Scalate Scaml Sample'
+
+    dependencies {
+      compile project(':messages')
+      compile("org.fusesource.scalate:scalate-spring-mvc:$scalateVersion") {
+          exclude group: 'org.springframework'
+      }
+    }
+}
+
+project('scalate-ssp') {
+    apply plugin: 'war'
+    apply plugin: 'jetty'
+
+    description = 'Scalate SSP Sample'
+
+    dependencies {
+      compile project(':messages')
+      compile("org.fusesource.scalate:scalate-spring-mvc:$scalateVersion") {
+          exclude group: 'org.springframework'
+      }
+    }
+}
+
+project('thymeleaf') {
+  apply plugin: 'war'
+  apply plugin: 'jetty'
+
+  description = 'Thyemeleaf Sample'
+
+  dependencies {
+    compile project(':messages'),
+        "org.thymeleaf:thymeleaf:2.0.13",
+        "org.thymeleaf:thymeleaf-spring3:2.0.13",
+        "javax.servlet:jstl:1.2"
+  }
+}
+
+project('thymeleaf-tiles') {
+    apply plugin: 'war'
+    apply plugin: 'jetty'
+
+    description = 'Thyemeleaf Tiles Sample'
+
+    dependencies {
+      compile project(':messages'),
+          "org.thymeleaf:thymeleaf:2.0.13",
+          "org.thymeleaf:thymeleaf-spring3:2.0.13",
+          "javax.servlet:jstl:1.2"
+      compile("org.thymeleaf.extras:thymeleaf-extras-tiles2:1.0.0-beta2") {
+          exclude group: 'org.slf4j'
+      }
+    }
+}
+
+project('thymeleaf-layout') {
+    apply plugin: 'war'
+    apply plugin: 'jetty'
+
+    description = 'Thyemeleaf Layout Sample'
+
+    dependencies {
+      compile project(':messages'),
+          "org.thymeleaf:thymeleaf:2.0.13",
+          "org.thymeleaf:thymeleaf-spring3:2.0.13",
+          "nz.net.ultraq.web.thymeleaf:thymeleaf-layout-dialect:1.0.3"
+    }
+}
+
+task wrapper(type: Wrapper) {
+  description = 'Generates gradlew[.bat] scripts'
+  gradleVersion = '1.2'
+}
+

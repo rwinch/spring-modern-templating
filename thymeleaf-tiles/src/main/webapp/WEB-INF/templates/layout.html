@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+  <head>
+    <title tiles:include="title">Layout</title>
+    <link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}"
+        href="../../resources/css/bootstrap.min.css"><!-- --></link>
+  </head>
+  <body>
+    <div class="container">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <a class="brand" href="https://github.com/thymeleaf/thymeleaf-extras-tiles2">
+              Thymeleaf - Tiles
+          </a>
+          <ul class="nav">
+            <li><a th:href="@{/}" href="messages/list.html">Messages</a></li>
+          </ul>
+        </div>
+      </div>
+      <h1 tiles:include="title">Layout</h1>
+      <div class="alert alert-success"
+          th:if="${globalMessage}"
+          th:text="${globalMessage}">
+        Some Success message
+      </div>
+      <div tiles:substituteby="content">
+        Fake content
+      </div>
+    </div>
+  </body>
+</html>

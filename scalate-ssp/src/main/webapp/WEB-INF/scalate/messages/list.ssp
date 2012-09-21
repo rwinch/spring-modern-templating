@@ -1,0 +1,36 @@
+<% import java.util.List %>
+<% import org.springframework.test.web.mail.data.Message %>
+<%@ val messages: List[Message] %>
+<% layout("../layouts/default.ssp") {%>
+  <% attributes("title") = "View all" %>
+  <div class="pull-right">
+    <a href="./?form">Create Message</a>
+   </div>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>Created</td>
+        <td>Summary</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% if(messages.isEmpty()) { %>
+        <tr>
+          <td colspan="3">No messages</td>
+        </tr>
+      <% } %>
+      <% messages.foreach { message => %>
+        <tr>
+          <td>${message.getId()}</td>
+          <td>${message.getCreated().getTime()}</td>
+          <td>
+            <a href="${message.getId()}">
+              ${message.getSummary()}
+            </a>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+<% } %>

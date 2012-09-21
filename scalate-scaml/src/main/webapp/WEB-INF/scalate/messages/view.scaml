@@ -1,0 +1,16 @@
+- import org.springframework.test.web.mail.data.Message
+-@ val message: Message
+
+- layout("../layouts/default.scaml")
+  - attributes("title") = "View"
+  .pull-right
+    %a{ :href=> "./"} Messages
+  %dl
+    %dt ID
+    %dd(id="id") = message.getId()
+    %dt Date
+    %dd(id="created") = message.getCreated().getTime()
+    %dt Summary
+    %dd(id="summary") = message.getSummary()
+    %dt Message
+    %dd(id="text") = message.getText()

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Messages : View all</title>
+    <link rel="stylesheet"
+      href="{{springMacroRequestContext.request.contextPath}}/resources/css/bootstrap.min.css"><!-- --></link>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Messages : View all</h1>
+      <div class="pull-right">
+        <a href="./?form">Create Message</a>
+       </div>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>Created</td>
+            <td>Summary</td>
+          </tr>
+        </thead>
+        <tbody>
+          {{^messages}}
+            <tr>
+              <td colspan="3">No messages</td>
+            </tr>
+          {{/messages}}
+          {{#messages}}
+            <tr>
+              <td>{{id}}</td>
+              <td>{{created.time}}</td>
+              <td><a href="./{{id}}">{{summary}}</a></td>
+            </tr>
+          {{/messages}}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

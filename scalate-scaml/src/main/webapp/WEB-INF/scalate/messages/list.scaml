@@ -1,0 +1,31 @@
+- import java.util.List
+- import org.springframework.test.web.mail.data.Message
+-@ val messages: List[Message]
+
+- layout("../layouts/default.scaml")
+  - attributes("title") = "View All"
+  .pull-right
+    %a( href= "./?form")  Create Message
+  %table.table.table-bordered.table-striped
+    %thead
+      %tr
+        %td ID
+        %td Created
+        %td Summary
+    %tbody
+      - if(messages.isEmpty()) {
+        %tr
+          %td(colspan="3") No messages
+      - }
+      - messages.foreach { message =>
+        %tr
+          - import message._
+          %td = getId()
+          %td = getCreated().getTime()
+          %td <a href="./#{getId()}">#{getSummary()}</a>
+          -#
+            The above is a workaround because the following fails
+            with the error: object List is not a value
+            %td
+              %a(href={getId()}) = getSummary()
+      -}

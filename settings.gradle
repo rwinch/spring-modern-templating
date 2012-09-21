@@ -1,0 +1,7 @@
+include 'messages'
+include 'thymeleaf'
+include 'thymeleaf-tiles'
+include 'thymeleaf-layout'
+include 'mustache'
+include 'scalate-scaml'
+include 'scalate-ssp'

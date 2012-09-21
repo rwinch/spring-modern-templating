@@ -1,0 +1,27 @@
+<% import org.springframework.test.web.mail.data.Message %>
+
+<%@ val message: Message %>
+
+<% layout("../layouts/default.ssp") {%>
+  <% attributes("title") = "Create" %>
+  <form id="messageForm" action="./?form" method="post">
+    <div class="pull-right">
+      <a href="./">
+        Messages
+      </a>
+    </div>
+    <label for="summary">
+      Summary
+    </label>
+    <input type="text" name="summary"
+      id="summary" value="${message.getSummary()}"/>
+    <label for="text">
+      Message
+    </label>
+    <textarea name="text" id="text"
+      value="${message.getText()}"></textarea>
+    <div class="form-actions">
+      <input type="submit" value="Create"/>
+    </div>
+  </form>
+<% } %>

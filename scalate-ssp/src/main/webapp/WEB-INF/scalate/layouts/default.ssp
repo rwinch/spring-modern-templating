@@ -1,0 +1,44 @@
+<%@ var title: String = "Welcome" %>
+
+<%
+  import java.util.ArrayList
+  import org.springframework.validation.ObjectError %>
+<%@ var body: String %>
+<%@  val formErrors : java.util.List[ObjectError] = new ArrayList %>
+<%@ val globalMessage: String = "" %>
+
+<html>
+<head>
+  <title>Messages : ${title}</title>
+  <link rel="stylesheet" href="./resources/css/bootstrap.min.css"><!-- --></link>
+</head>
+<body>
+  <div class="container">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a class="brand"
+            href="http://scalate.fusesource.org/documentation/user-guide.html#Ssp__Scala_Server_Pages_">
+            Scalate - SSP
+        </a>
+        <ul class="nav">
+          <li><a href="./">Messages</a></li>
+        </ul>
+      </div>
+    </div>
+    <h1>Messages : ${title}</h1>
+    <% if(!formErrors.isEmpty()) { %>
+      <div class="alert alert-error">
+        <ul>
+          <% formErrors.foreach { error => %>
+            <li> ${error.getDefaultMessage()} </li>
+          <% } %>
+        </ul>
+      </div>
+    <% } %>
+    <%if(globalMessage != "") {%>
+      <div class="alert alert-success">${globalMessage}</div>
+    <% } %>
+  ${unescape(body)}
+  </div>
+</body>
+</html>

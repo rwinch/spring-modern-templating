@@ -1,0 +1,14 @@
+- import org.springframework.test.web.mail.data.Message
+-@ val message: Message
+
+- layout("../layouts/default.scaml")
+  - attributes("title") = "Create"
+  %form(action="./?form" method="post")
+    .pull-right
+      %a{ :href=> "./"} Messages
+    %label(for="summary") Summary
+    %input(type="text" name="summary" value = {message.getSummary()})
+    %label(for="text") Message
+    %textarea(name="text") = message.getText()
+    .form-actions
+      %input(type="submit" value="Create")

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Messages : Create</title>
+    <link rel="stylesheet"
+      href="{{springMacroRequestContext.request.contextPath}}/resources/css/bootstrap.min.css"><!-- --></link>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Messages : Create</h1>
+      {{#formErrors}}
+        <div class="alert alert-error">
+          {{defaultMessage}}
+        </div>
+      {{/formErrors}}
+      <form id="messageForm" action="./?form" method="post">
+        <div class="pull-right"><a href="./">Messages</a></div>
+        <label for="summary">Summary</label>
+        <input type="text"
+            name="summary"
+            id="summary"
+            value="{{message.summary}}"/>
+        <label for="text">Message</label>
+        <textarea
+            name="text"
+            id="text">{{message.text}}</textarea>
+        <div class="form-actions">
+          <input type="submit" value="Create"/>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

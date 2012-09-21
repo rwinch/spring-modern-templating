@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Messages : View</title>
+     <link rel="stylesheet"
+       href="{{springMacroRequestContext.request.contextPath}}/resources/css/bootstrap.min.css"><!-- --></link>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Messages : View</h1>
+      {{#globalMessage}}
+        <div class="alert alert-success">
+          {{globalMessage}}
+        </div>
+      {{/globalMessage}}
+      <div class="pull-right">
+        <a href="./">Messages</a>
+      </div>
+      <dl>
+        <dt>ID</dt>
+        <dd id="id">{{message.id}}</dd>
+        <dt>Date</dt>
+        <dd id="created">{{message.created.time}}</dd>
+        <dt>Summary</dt>
+        <dd id="summary">{{message.summary}}</dd>
+        <dt>Message</dt>
+        <dd id="text">{{message.text}}</dd>
+      </dl>
+    </div>
+  </body>
+</html>

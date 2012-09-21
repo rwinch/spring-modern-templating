@@ -1,0 +1,35 @@
+- import org.springframework.test.web.mail.data.Message
+- import org.springframework.validation.ObjectError
+- import java.util.ArrayList
+-@ val body: String
+-@ val title: String = "Welcome"
+-@ val formErrors : java.util.List[ObjectError] = new ArrayList
+-@ val globalMessage: String = ""
+
+!!! 5
+%html(lang="en")
+  %head
+    %title Messages : #{title}
+    %link{ :rel=> "stylesheet", :href => "./resources/css/bootstrap.min.css"}
+  %body
+    .container
+      .navbar
+        .navbar-inner
+          %a(class="brand" href="http://scalate.fusesource.org/documentation/user-guide.html#Scaml__Scala_Markup_Language_")
+            Scalate - Scaml
+          %ul(class="nav")
+            %li
+              %a(href="./") Messages
+      %h1
+        Messages : #{title}
+      - if(!formErrors.isEmpty()) {
+        .alert.alert-error
+          %ul
+            - formErrors.foreach { error =>
+              %li = error.getDefaultMessage()
+            - }
+      - }
+      -if(globalMessage != "") {
+        .alert.alert-success = globalMessage
+      -}
+      !~~ body
