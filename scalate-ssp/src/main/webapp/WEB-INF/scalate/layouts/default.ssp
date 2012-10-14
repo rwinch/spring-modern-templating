@@ -10,7 +10,7 @@
 <html>
 <head>
   <title>Messages : ${title}</title>
-  <link rel="stylesheet" href="./resources/css/bootstrap.min.css"><!-- --></link>
+  <link rel="stylesheet" href="./resources/css/bootstrap.min.css"/>
 </head>
 <body>
   <div class="container">

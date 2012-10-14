@@ -21,8 +21,7 @@
         </thead>
         <tbody>
           <tr th:if="${messages.empty}">
-            <td colspan="3"
-                th:text="'No messages'">
+            <td colspan="3">
               No messages
             </td>
           </tr>
@@ -33,7 +32,7 @@
             </td>
             <td>
               <a href="view.html"
-                  th:href="@{/__${message.id}__}"
+                  th:href="@{'/' + ${message.id}}"
                   th:text="${message.summary}">
                 The summary
               </a>

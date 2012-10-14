@@ -3,7 +3,7 @@
   <head>
     <title>Messages : View</title>
     <link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}"
-        href="../../../resources/css/bootstrap.min.css"><!-- --></link>
+        href="../../../resources/css/bootstrap.min.css"/>
   </head>
   <body>
     <div class="container">
@@ -19,6 +19,8 @@
         </a>
       </div>
       <dl th:object="${message}">
+        <!-- We demonstrate *{} and ${} here intentionally. If
+             desired all properties could use either strategy. -->
         <dt>ID</dt>
         <dd id="id" th:text="*{id}">123</dd>
         <dt>Date</dt>
