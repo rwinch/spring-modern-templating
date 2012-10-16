@@ -70,6 +70,7 @@ project('mustache') {
       compile project(':messages')
       // https://github.com/ericdwhite/mustache.java-spring-webmvc/blob/master/pom.xml
       compile("com.samskivert:jmustache:1.5")
+      compile "javax.servlet:servlet-api:2.5"
     }
 }
 
@@ -151,3 +152,6 @@ task wrapper(type: Wrapper) {
   gradleVersion = '1.2'
 }
 
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 30, 'days'
+}
