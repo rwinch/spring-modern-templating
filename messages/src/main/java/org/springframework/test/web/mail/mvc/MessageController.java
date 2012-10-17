@@ -64,8 +64,7 @@ public class MessageController {
     Message message, BindingResult result, RedirectAttributes redirect) {
         if (result.hasErrors()) {
             return new ModelAndView("messages/form", "formErrors",
-                result.getAllErrors())
-                .addObject("message", message);
+                result.getAllErrors());
         }
         message = messageRepository.save(message);
         redirect.addFlashAttribute("globalMessage",
@@ -74,3 +73,10 @@ public class MessageController {
             "message.id", message.getId());
     }
 }
+
+
+
+
+
+
+
