@@ -1,7 +1,7 @@
 About
 =================
 
-Source Code and materials for [A TOUR OF MODERN TEMPLATING FRAMEWORKS WITH SPRING MVC](http://www.springone2gx.com/conference/washington/2012/10/session?id=27657). To run the samples import the project into Spring Tool Suite using the Gradle Eclipse plugin.
+Source Code and materials for [A Tour of Modern Templating Frameworks with Spring MVC](https://www.youtube.com/watch?v=EdRNoQK7r7g&list=PLgGXSWYM2FpOgqA05ex4vdZno0wbwgJyz&index=19). To run the samples import the project into Spring Tool Suite using the Gradle Eclipse plugin.
 
 
 Running the sample project
